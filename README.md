@@ -2,7 +2,14 @@
 
 VS Code viewer for Claude Code Design `canvas.json` / `.canvas` files.
 
-Features:
+## VS Code install: 
+- Ctrl+Shift+P
+- Extensions: Install from VSIX...
+- Choose claude-canvas-viewer-x.x.x.vsix
+- Open canvas.json
+- If VS Code asks editor — choose Claude Canvas
+
+## Features:
 - Custom editor for `canvas.json` and `*.canvas`
 - Renders `.dc.html` artboards at their declared x/y/w/h
 - Pan and mouse-wheel zoom
