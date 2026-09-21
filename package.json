@@ -1,0 +1,71 @@
+{
+  "name": "claude-canvas-viewer",
+  "displayName": "Claude Canvas Viewer",
+  "description": "VS Code viewer for Claude Code Design canvas.json and .dc.html artboards",
+  "version": "0.2.1",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCustomEditor:claudeCanvas.viewer"
+  ],
+  "main": "extension.js",
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "claudeCanvas.viewer",
+        "displayName": "Claude Canvas",
+        "selector": [
+          {
+            "filenamePattern": "canvas.json"
+          },
+          {
+            "filenamePattern": "*.canvas"
+          }
+        ],
+        "priority": "option"
+      },
+      {
+        "viewType": "claudeCanvas.canvasEditor",
+        "displayName": "Claude Canvas",
+        "selector": [
+          {
+            "filenamePattern": "*.canvas"
+          },
+          {
+            "filenamePattern": "canvas.json"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "claudeCanvas.openViewer",
+        "title": "Claude Canvas: Open Viewer"
+      },
+      {
+        "command": "claudeCanvas.open",
+        "title": "Claude Canvas: Open Canvas"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "claudeCanvas.openViewer",
+          "when": "resourceFilename == canvas.json || resourceExtname == .canvas"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "claudeCanvas.open",
+        "key": "ctrl+alt+c"
+      }
+    ]
+  }
+}
