@@ -2,42 +2,56 @@
   "name": "claude-canvas-viewer",
   "displayName": "Claude Canvas Viewer",
   "description": "VS Code viewer for Claude Code Design canvas.json and .dc.html artboards",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "publisher": "local",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZetsubouToshio/claude-canvas-viewer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ZetsubouToshio/claude-canvas-viewer/issues"
+  },
+  "homepage": "https://github.com/ZetsubouToshio/claude-canvas-viewer#readme",
+  "keywords": [
+    "claude",
+    "canvas",
+    "design",
+    "artboard",
+    "viewer",
+    "html"
+  ],
   "engines": {
-    "vscode": "^1.85.0"
+    "vscode": "^1.85.0",
+    "node": ">=22"
   },
   "categories": [
+    "Visualization",
     "Other"
   ],
-  "activationEvents": [
-    "onCustomEditor:claudeCanvas.viewer"
-  ],
-  "main": "extension.js",
+  "activationEvents": [],
+  "main": "./src/extension.js",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "Scripts inside artboards are disabled until the workspace is trusted."
+    },
+    "virtualWorkspaces": {
+      "supported": false,
+      "description": "Claude Canvas Viewer reads canvas files from disk and needs a local file system."
+    }
+  },
   "contributes": {
     "customEditors": [
-      {
-        "viewType": "claudeCanvas.viewer",
-        "displayName": "Claude Canvas",
-        "selector": [
-          {
-            "filenamePattern": "canvas.json"
-          },
-          {
-            "filenamePattern": "*.canvas"
-          }
-        ],
-        "priority": "option"
-      },
       {
         "viewType": "claudeCanvas.canvasEditor",
         "displayName": "Claude Canvas",
         "selector": [
           {
-            "filenamePattern": "*.canvas"
+            "filenamePattern": "canvas.json"
           },
           {
-            "filenamePattern": "canvas.json"
+            "filenamePattern": "*.canvas"
           }
         ],
         "priority": "default"
@@ -45,18 +59,18 @@
     ],
     "commands": [
       {
-        "command": "claudeCanvas.openViewer",
-        "title": "Claude Canvas: Open Viewer"
-      },
-      {
         "command": "claudeCanvas.open",
         "title": "Claude Canvas: Open Canvas"
+      },
+      {
+        "command": "claudeCanvas.openAsText",
+        "title": "Claude Canvas: Open Canvas as Text"
       }
     ],
     "menus": {
       "explorer/context": [
         {
-          "command": "claudeCanvas.openViewer",
+          "command": "claudeCanvas.open",
           "when": "resourceFilename == canvas.json || resourceExtname == .canvas"
         }
       ]
@@ -64,8 +78,34 @@
     "keybindings": [
       {
         "command": "claudeCanvas.open",
-        "key": "ctrl+alt+c"
+        "key": "ctrl+alt+c",
+        "when": "resourceFilename == canvas.json || resourceExtname == .canvas"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Claude Canvas",
+      "properties": {
+        "claudeCanvas.runArtboardScripts": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Run scripts inside artboards (`.dc.html`). Artboards live in a sandboxed frame that cannot reach VS Code or use `fetch`/XHR. Scripts never run in untrusted workspaces, whatever this setting says."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "node --test \"test/unit/**/*.test.js\"",
+    "test:e2e": "node --test \"test/e2e/**/*.test.js\"",
+    "check": "npm run lint && npm test",
+    "vscode:prepublish": "npm run check",
+    "package": "vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@vscode/vsce": "^4.0.0",
+    "eslint": "^10.12.0",
+    "globals": "^17.13.0",
+    "playwright-core": "^1.63.0"
   }
 }
