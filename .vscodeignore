@@ -1,0 +1,15 @@
+# Keep the VSIX small: ship only src/, media/, package.json, README, CHANGELOG, LICENSE.
+.github/**
+.vscode/**
+.vscode-test/**
+docs/**
+examples/**
+test/**
+node_modules/**
+eslint.config.js
+ROADMAP.md
+.gitignore
+.vscodeignore
+package-lock.json
+*.vsix
+**/*.map

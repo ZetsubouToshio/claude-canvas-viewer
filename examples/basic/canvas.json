@@ -1,0 +1,11 @@
+{
+  "artboards": [
+    { "title": "Login",     "file": "screens/login.dc.html",     "x": 0,   "y": 0, "w": 390, "h": 844 },
+    { "title": "Dashboard", "file": "screens/dashboard.dc.html", "x": 470, "y": 0, "w": 390, "h": 844 },
+    { "title": "Counter (runs a script)", "file": "screens/counter.dc.html", "x": 940, "y": 0, "w": 390, "h": 420 }
+  ],
+  "annotations": [
+    { "text": "Entry point.\nPan: drag the canvas. Zoom: mouse wheel.", "x": 0, "y": 880, "w": 390 },
+    { "text": "Double-click an artboard (or press its Interact button) to click inside it.", "x": 940, "y": 460, "w": 390 }
+  ]
+}
